@@ -29,7 +29,7 @@ def downloadImage(link, savePath):
 ##Variables
 downloadPage = "http://www.reddit.com/r/earthporn/" #Page to be downloaded from reddit
 imageFName = time.strftime("%m%d%Y_") #Filename format. Current it's MonthDayYear_XX
-savePath = "\\Users\\JohnDoe\\desktopBackgrounds\\" #Path to save files. Be sure to add the trailing slash. Ex: \\Users\\JohnDoe\\Pictures\\ or /home/jdoe/pictures/
+savePath = "images/" #Path to save files. Be sure to add the trailing slash. Ex: \\Users\\JohnDoe\\Pictures\\ or /home/jdoe/pictures/
 
 #We try to grab the reddit page a maximum of 20 times.
 #This is to compensate for any failures getting the page. urllib2 was throwing unknown errors on my Windows system, and I figured that it wouldn't hurt to just try a few times.
@@ -55,13 +55,13 @@ if(not success):
 	sys.exit()
 
 #Find all title links on the page
-search = re.findall('<a class=\"title \".*?href=\"(.*?)\".*?>', response.read())
+search = re.findall('<a class=\"title may-blank \".*?href=\"(.*?)\".*?>', response.read())
 
 if search == None:
 	print("Regex on site empty. Exiting.", file=sys.stderr)
 	sys.exit()
 
-lineIterator = 1
+lineIterator = 0
 for link in search:
 
 	#Basic file name for saving images: $SAVEPATH/date_X.
